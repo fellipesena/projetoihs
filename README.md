@@ -10,3 +10,6 @@ O MVP deste projeto é ter um único jogo já configurado no próprio console, s
 
 ## Fase 2
 A fase 2 é a adição de novos jogos, para isto, é necessário ter o console configurado para ler o arquivo do jogo a partir de um SD, sendo possível "gravar" mais jogos sem precisar compilar o console novamente.
+
+## Video de exemplo
+https://drive.google.com/file/d/17lsLCjrDTSXpHnnD_4UPEUPP3aFJ2GYu/view?usp=sharing
