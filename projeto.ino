@@ -15,7 +15,6 @@ int botaoCima = 0, botaoBaixo = 0, botaoEsquerda = 0, botaoDireita = 0;
 
 bool comeu = true;
 int comidaX = 0, comidaY = 0;
-//int cobraX[30] = {200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, cobraY[30] = {200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, tamanhoCobra = 0;
 int cobraX[] = {200, 0, 0, 0, 0}, cobraY[] = {200, 0, 0, 0, 0}, tamanhoCobra = 0;
 int raboCobraX = cobraX[0], raboCobraY = cobraY[0], cabecaCobraX = cobraX[tamanhoCobra], cabecaCobraY = cobraY[tamanhoCobra], velocidadeX = 0, velocidadeY = 0;
 
@@ -38,17 +37,16 @@ void setup() {
   
   // setando o buzzer como output
   pinMode(BUZZER, OUTPUT);
-}
 
-void loop() {
   vga.drawRect(0, 0, width - 1, height - 1, 1);
   vga.drawRect(3, 5, width - 8, height - 10, 1);
   vga.print_P("Projeto de IHS", 215, 200, true, -1, ESPVGAX_OP_OR, true);
   vga.print_P("DCOMP - UFS", 217, 220, true, -1, ESPVGAX_OP_OR, true);
   vga.print_P("Pressione uma tecla para continuar...", 165, 320, true, -1, ESPVGAX_OP_OR, true);
   vga.print_P("Pedro Fellipe Oliveira Sena", 190, 450, true, -1, ESPVGAX_OP_OR, true);
-  vga.delay(2);
-  
+}
+
+void loop() {  
   int teclaPressionada = 0;
   teclaPressionada = lerEntrada();
   if(teclaPressionada != 0){
@@ -88,10 +86,10 @@ void carregarJogo(){
   desenharCobra();
   if(comeu){
     carregarComida();
+    digitalWrite(BUZZER, LOW);
   }
   movimentarCobra();
   cobraComeu();
-  digitalWrite(BUZZER, LOW);
   atualizarCobra();
   gameOver();
 }
@@ -121,25 +119,21 @@ void movimentarCobra(){
     // apertando para cima
     velocidadeX = 0;
     velocidadeY = -8;
-    digitalWrite(BUZZER, HIGH);
   }
   if(mov == 2){
     // apertando para baixo
     velocidadeX = 0;
     velocidadeY = 8;
-    digitalWrite(BUZZER, HIGH);
   }
   if(mov == 3){
     // apertando para a direita
     velocidadeX = 8;
     velocidadeY = 0;
-    digitalWrite(BUZZER, HIGH);
   }
   if(mov == 4){
     // apertando para a esquerda
     velocidadeX = -8;
     velocidadeY = 0;
-    digitalWrite(BUZZER, HIGH);
   }
 }
 
@@ -147,6 +141,7 @@ void cobraComeu(){
   if((cabecaCobraX < comidaX + 4 && cabecaCobraX + 8 > comidaX) && (cabecaCobraY + 8 > comidaY && cabecaCobraY < comidaY + 4)){
     comeu = true;
     tamanhoCobra = tamanhoCobra + 1;
+    digitalWrite(BUZZER, HIGH);
   }
   else{
     comeu = false;
@@ -157,8 +152,6 @@ void atualizarCobra(){
   raboCobraX = cobraX[0];
   raboCobraY = cobraY[0];
 
-  
- 
   if(comeu){
     cobraX[tamanhoCobra] = cobraX[tamanhoCobra-1] + velocidadeX;
     cobraY[tamanhoCobra] = cobraY[tamanhoCobra-1] + velocidadeY;  
@@ -171,7 +164,6 @@ void atualizarCobra(){
 
   cobraX[tamanhoCobra] = cobraX[tamanhoCobra] + velocidadeX;
   cobraY[tamanhoCobra] = cobraY[tamanhoCobra] + velocidadeY;
- 
  
   cabecaCobraX = cobraX[tamanhoCobra];
   cabecaCobraY = cobraY[tamanhoCobra];
