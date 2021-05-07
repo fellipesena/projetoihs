@@ -1,5 +1,7 @@
 # projetoihs
 
+Projeto desenvolvido em 01/2021 para a disciplina Interface Hardware Software (DCOMP/UFS)
+
 ## Sobre o projeto
 O projeto é transformar dois ESP 8266 em um console com controle.
 A ideia é ter um ESP sendo o "console", onde terão os jogos em um cartão de memória que serão lidos e executados a partir do mesmo, exibidos em uma televisão a partir de um cabo VGA.
